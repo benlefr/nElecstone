@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+<style>
+input[type=checkbox] {
+box-sizing: border-box;
+border: 2px solid #ccc;
+border-radius: 4px;
+font-size: 16px;
+background-color: white;
+padding: 12px 20px 12px 40px;
+}
+input{
+    margin-left: 50px;
+}
+textarea {
+box-sizing: border-box;
+border: 2px solid #ccc;
+border-radius: 4px;
+margin-left: 50px;
+font-size: 16px;
+background-color: white;
+padding: 12px 20px 12px 40px;
+}
+</style>
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline'">
+
+</head>
+
+<body>
+
+<input name="opacity" type="range" id="opacity" min="0" max="100">
+<label id="opacity" for="opacity">100</label>
+<br>
+<input name="refresh" type="number" id="refresh" placeholder="temps en seconde">
+
+<br>
+<input type="checkbox" id="Hide" name="Hide" value="Hide" placeholder="0.1 -- 1" checked>
+<label for="Hide">Visible Website</label>
+<br>
+<textarea id="trayicontab" cols="30" rows="10"></textarea>
+<button id="Save">Save</button>
+<!-- <script src="preload_config.js"></script> -->
+</body>
+
+</html>

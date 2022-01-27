@@ -1,0 +1,44 @@
+{
+    "name": "nelecstone",
+    "version": "1.0.69",
+    "description": "Moi le hentai beurk",
+    "main": "main.js",
+    "scripts": {
+        "start": "electron .",
+        "build": "electron-packager . nElecstone --overwrite --asar --platform=win32 --arch=ia32 --icon=icon_logo.ico --prune=true --out=nElecstone --version-string.CompanyName=CE --version-string.FileDescription=CE --version-string.ProductName='nElecstone'",
+        "build-installer": "electron-builder"
+    },
+    "build": {
+        "appId": "nelecstone",
+        "win": {
+            "target": [
+                "nsis"
+            ],
+            "icon": "img/icon_logo.png"
+        }
+    },
+    "nsis": {
+        "installerIcon": "img/icon_logo.png",
+        "uninstallerIcon": "img/icon_logo.png",
+        "uninstallDisplayName": "nelecstone",
+        "onClick": false,
+        "allowToChangeInstallationDirectory": true
+    },
+    "keywords": [
+        "Electron"
+    ],
+    "license": "CC0-1.0",
+    "devDependencies": {
+        "electron": "^12.0.9",
+        "electron-builder": "^22.14.5"
+    },
+    "dependencies": {
+        "auto-launch": "^5.0.5",
+        "custom-electron-titlebar": "^3.2.7",
+        "electron-custom-titlebar": "^4.0.2",
+        "nhentai-node-api": "^1.1.2",
+        "node-fetch": "^2.6.6",
+        "ps-list": "^7.2.0",
+        "wallpaper": "^6.1.1"
+    }
+}
