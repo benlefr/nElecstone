@@ -105,7 +105,7 @@ function createWindow() {
 
     // Create the browser window.
     var screen_size = screen.getPrimaryDisplay().size
-    var window_size = [screen_size.width * 0.2, screen_size.height * 0.5]
+    var window_size = [Math.floor(screen_size.width * 0.2), Math.floor(screen_size.height * 0.5)]
     console.log(window_size)
     const mainWindow = new BrowserWindow({
         width: window_size[0],
@@ -169,12 +169,12 @@ function createWindow() {
 function notifwindow() {
     // Create the browser window.
     var screen_size = screen.getPrimaryDisplay().size
-    var window_size = [screen_size.width * 0.2, screen_size.height * 0.5]
+    var window_size = [Math.floor(screen_size.width * 0.2), Math.floor(screen_size.height * 0.5)]
     const update_code_window = new BrowserWindow({
         transparent: true,
         frame: false,
-        width: screen_size.width / 2,
-        height: screen_size.width / 8,
+        width: Math.floor(screen_size.width / 2),
+        height: Math.floor(screen_size.width / 8),
 
         x: screen_size.width - window_size[0],
         y: screen_size.height,
