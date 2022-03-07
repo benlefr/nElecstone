@@ -22,6 +22,27 @@ margin-left: 50px;
 font-size: 16px;
 background-color: white;
 padding: 12px 20px 12px 40px;
+display: inline;
+}
+
+div#process{    
+    display: flex;
+    width: 50%;
+    padding-left: 25%;
+    padding-right: 25%;
+}
+
+div#divProcessAccept{
+    background-color: rgba(14, 156, 57, 0.589);
+}
+div#divProcessRefuse{
+    background-color: rgba(156, 14, 14, 0.589);   
+}
+li{
+    list-style: none;
+}
+li:hover{
+    color: white;
 }
 </style>
 <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline'">
@@ -38,8 +59,22 @@ padding: 12px 20px 12px 40px;
 <br>
 <input type="checkbox" id="Hide" name="Hide" value="Hide" placeholder="0.1 -- 1" checked>
 <label for="Hide">Visible Website</label>
+<input type="checkbox" id="PremierPlan" name="PremierPlan" value="PremierPlan" placeholder="PremierPlan" checked>
+<label for="PremierPlan">PremierPlan</label>
 <br>
 <textarea id="trayicontab" cols="30" rows="10"></textarea>
+<!-- <div id=process>
+
+    <div id="divProcessAccept" class="col">
+    
+        <ul id="processListA" cols="30" rows="10"></ul>
+    </div>
+    
+    <div id="divProcessRefuse">    
+        <ul id="processListR" class = "col"cols="30" rows="10"></ul>
+    </div>
+    </div>
+</div> -->
 <button id="Save">Save</button>
 <!-- <script src="preload_config.js"></script> -->
 </body>

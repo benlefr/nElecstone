@@ -4,8 +4,14 @@
 const { ipcRenderer } = require('electron')
 const fs = require('fs')
 const nhentai_api = require('nhentai-node-api')
-window.addEventListener('DOMContentLoaded', () => {
-    let config = JSON.parse(fs.readFileSync('config.json', 'utf-8', (err, data) => { config = data}))
+window.addEventListener('DOMContentLoaded', async () => {
+    let config;
+    try {
+        
+         config = JSON.parse(fs.readFileSync('config.json', 'utf-8', (err, data) => { config = data}))
+    } catch (error) {
+        config = { "refresh": 3600 }          
+    }
 
     const replaceText = (selector, text) => {
         const element = document.getElementById(selector)
@@ -41,7 +47,29 @@ window.addEventListener('DOMContentLoaded', () => {
     }
 
 
-    if (document.location.href.startsWith('https://nhentai.net/')) {
+    if (document.location.href.startsWith('https://nhentai.net')) {
+        FilterEnglishCheckBox = document.createElement('input')
+        FilterEnglishCheckBox.type = "CheckBox"
+        FilterEnglishCheckBox.name = "JustEnglish"
+        lb = document.createElement('label')
+        lb.for = "JustEnglish"
+        lb.innerText = "Filtre Anglais"
+        FilterEnglishCheckBox.addEventListener('click', () => { if (FilterEnglishCheckBox.checked){localStorage.setItem("JustEnglish", "yes");  justEnglish(true);} else {justEnglish(false); localStorage.setItem("JustEnglish", "no");}})
+        // document.querySelector('div#content')
+        
+        setTimeout(() => { 
+             try { document.querySelector('div.sort-type').appendChild(FilterEnglishCheckBox)} catch{}
+               try { document.querySelector('div.sort-type').appendChild(lb)} catch{}
+               try {document.querySelector('h2').appendChild(FilterEnglishCheckBox)} catch{}
+               try {document.querySelector('h2').appendChild(lb)} catch{}
+               if(localStorage.getItem("JustEnglish")=='yes') FilterEnglishCheckBox.click()
+
+           }, 1);    
+             
+        
+            
+        
+        
         nodaily()
         remove_pub()
         
@@ -49,6 +77,9 @@ window.addEventListener('DOMContentLoaded', () => {
             location.reload()
         }, config.refresh*1000);
         console.log(config.refresh*1000)
+        if(document.location.href.includes("https://nhentai.net/tags/")){
+            TagFinder()
+        }
         if(document.location.href.includes('https://nhentai.net/artists/'))
             AuteurRGB()
         if(document.location.href.includes('https://nhentai.net/g/'))
@@ -106,17 +137,33 @@ window.addEventListener('DOMContentLoaded', () => {
                 var Auteur = document.querySelector('#tag-container').getElementsByTagName('a')[i]
                 var autcon = parseInt(Auteur.getElementsByClassName('count')[0].innerText)
                 if (autcon > NOMBRE_POSTED) {
-                    var css = `.${Auteur.className.toString().replace(' ', '.')} {animation-name:test; animation-duration:4s; animation-iteration-count:infinite; } @keyframes test{ 0%{color:#ff0000} 20%{color:#00ff00} 40%{color:#ffff00} 60%{color:#0000ff} 80%{color:#00ffff} 100%{color:#ff0000}`, head = document.head || document.getElementsByTagName('head')[0], style = document.createElement('style'); style.type = 'text/css';
-                    if (style.styleSheet) { style.styleSheet.cssText = css; }
-                    else { style.appendChild(document.createTextNode(css)); }
-
-                    Auteur.appendChild(style)
-                    Auteur.getElementsByClassName('count')[0].appendChild(style)
+                    TextRGB(Auteur)
                 }
 
             }
         }
+        function TextRGB(Parent){
+            var css = `.${Parent.className.toString().replace(' ', '.')} {animation-name:test; animation-duration:4s; animation-iteration-count:infinite; } @keyframes test{ 0%{color:#ff0000} 20%{color:#00ff00} 40%{color:#ffff00} 60%{color:#0000ff} 80%{color:#00ffff} 100%{color:#ff0000}`, head = document.head || document.getElementsByTagName('head')[0], style = document.createElement('style'); style.type = 'text/css';
+            if (style.styleSheet) { style.styleSheet.cssText = css; }
+            else { style.appendChild(document.createTextNode(css)); }
 
+            Parent.appendChild(style)
+            // Parent.getElementsByClassName('count')[0].appendChild(style)
+        }
+        function justEnglish(bool) {
+
+            if(bool){
+                console.log("filtre anglais appliquation")
+                x = document.querySelectorAll('.gallery')
+                for(i=0; i < x.length; i++){
+                if(!x[i].getAttribute('data-tags').includes("12227"))x[i].remove()
+                }
+                console.log("filtre anglais appliquer")
+            }else{
+                location.reload()
+            }
+
+        }
         function open_nsetting() {
             if (document.getElementsByClassName('reader-settings btn btn-unstyled')) document.getElementsByClassName('reader-settings btn btn-unstyled')[0].click()
             document.getElementsByTagName('select')[2].value = '"fit-both"'
@@ -135,7 +182,50 @@ window.addEventListener('DOMContentLoaded', () => {
                 console.log(error)
             }
         }
+        function TagFinder() {
+            if(!localStorage.getItem("TagFinder")) localStorage.setItem("TagFinder", JSON.stringify([]))
+            let tagRGB = JSON.parse(localStorage.getItem("TagFinder"))
+            div = document.createElement('div')
+            input = document.createElement('input')
+            
+            buttonRMTAg = document.createElement('button')
+            div.className = "sort-type"
+            input.type = 'text'
+            input.placeholder = "add tag rgb"
 
+            buttonRMTAg.addEventListener('click', ()=>{if(tagRGB.indexOf(select.value)>-1) tagRGB.splice(tagRGB.indexOf(select.value),1); localStorage.setItem("TagFinder", JSON.stringify(tagRGB)); location.reload();})
+            buttonRMTAg.innerText = "Remove"
+
+            let select= document.createElement('select')
+            select.name = "tagRGB"
+            for (let i = 0; i < tagRGB.length; i++) {
+                let element = tagRGB[i];
+                x = document.createElement('option')
+                x.value = element
+                x.innerText = element
+                select.appendChild(x)
+                
+            }
+            function addtag(value){
+                tagRGB.push(value);
+                localStorage.setItem("TagFinder", JSON.stringify(tagRGB))
+                location.reload()
+            }
+            div.appendChild(input)
+            div.appendChild(select)
+            div.appendChild(buttonRMTAg)
+            input.addEventListener('keypress', (e) => {
+                if (e.code === "NumpadEnter" || e.code === "Enter") addtag(input.value)
+            })
+            document.querySelector('div.sort').appendChild(div)
+            for (let i = 0; i < document.querySelectorAll('span.name').length; i++) {
+                let element = document.querySelectorAll('span.name')[i];
+                if(tagRGB.indexOf(element.innerText)!==-1){          
+                    TextRGB(element.parentElement)
+                }               
+            }
+           
+        }
     }
 
 
