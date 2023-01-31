@@ -48,13 +48,7 @@ window.addEventListener('DOMContentLoaded', async () => {
 
 
     if (document.location.href.startsWith('https://nhentai.net')) {
-        FilterEnglishCheckBox = document.createElement('input')
-        FilterEnglishCheckBox.type = "CheckBox"
-        FilterEnglishCheckBox.name = "JustEnglish"
-        lb = document.createElement('label')
-        lb.for = "JustEnglish"
-        lb.innerText = "Filtre Anglais"
-        FilterEnglishCheckBox.addEventListener('click', () => { if (FilterEnglishCheckBox.checked){localStorage.setItem("JustEnglish", "yes");  justEnglish(true);} else {justEnglish(false); localStorage.setItem("JustEnglish", "no");}})
+
         // document.querySelector('div#content')
         
         setTimeout(() => { 
@@ -70,9 +64,9 @@ window.addEventListener('DOMContentLoaded', async () => {
             
         
         
+           JustEnglish()
         nodaily()
         remove_pub()
-        
         setTimeout(() => {
             location.reload()
         }, config.refresh*1000);

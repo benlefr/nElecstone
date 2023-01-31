@@ -44,8 +44,35 @@ li{
 li:hover{
     color: white;
 }
+table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+td, th {
+  border: 1px solid #ddd;
+  padding: 8px;
+}
+
+tr:nth-child(even) {
+  background-color: #f2f2f2;
+}
+
+@media (max-width: 768px) {
+  td, th {
+    display: block;
+    width: 100%;
+    text-align: left;
+  }
+  td:before, th:before {
+    content: attr(data-label);
+    display: inline-block;
+    font-weight: bold;
+    width: 50%;
+  }
+}
 </style>
-<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline'">
+<!-- <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline'"> -->
 
 </head>
 
@@ -57,12 +84,12 @@ li:hover{
 <input name="refresh" type="number" id="refresh" placeholder="temps en seconde">
 
 <br>
-<input type="checkbox" id="Hide" name="Hide" value="Hide" placeholder="0.1 -- 1" checked>
+<input type="checkbox" id="visible" name="visible" value="visible" placeholder="0.1 -- 1" checked>
 <label for="Hide">Visible Website</label>
 <input type="checkbox" id="PremierPlan" name="PremierPlan" value="PremierPlan" placeholder="PremierPlan" checked>
 <label for="PremierPlan">PremierPlan</label>
 <br>
-<textarea id="trayicontab" cols="30" rows="10"></textarea>
+<div id="trayicontab"></div>
 <!-- <div id=process>
 
     <div id="divProcessAccept" class="col">
@@ -75,7 +102,7 @@ li:hover{
     </div>
     </div>
 </div> -->
-<button id="Save">Save</button>
+<!-- <button id="Save">Save</button> -->
 <!-- <script src="preload_config.js"></script> -->
 </body>
 

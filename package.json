@@ -5,11 +5,11 @@
   "main": "main.js",
   "scripts": {
     "start": "electron .",
-    "build": "electron-packager . nElecstone --overwrite --asar --platform=win32 --arch=ia32 --icon=icon_logo.ico --prune=true --out=nElecstone --version-string.CompanyName=CE --version-string.FileDescription=CE --version-string.ProductName='nElecstone'",
+    "build": "electron-packager . nElecstone --asar  --overwrite",
     "build-installer": "electron-builder"
   },
   "build": {
-    "appId": "nelecstone",
+    "appId": "nElecstone",
     "win": {
       "target": [
         "nsis"
@@ -20,7 +20,7 @@
   "nsis": {
     "installerIcon": "img/icon_logo.png",
     "uninstallerIcon": "img/icon_logo.png",
-    "uninstallDisplayName": "nelecstone",
+    "uninstallDisplayName": "nElecstone",
     "onClick": false,
     "allowToChangeInstallationDirectory": true
   },
@@ -29,19 +29,9 @@
   ],
   "license": "CC0-1.0",
   "devDependencies": {
-    "electron": "^12.0.9",
-    "electron-builder": "^22.14.5"
-  },
-  "dependencies": {
-    "auto-launch": "^5.0.5",
-    "current-processes": "^0.2.1",
-    "custom-electron-titlebar": "^3.2.7",
-    "electron-custom-titlebar": "^4.0.2",
-    "nhentai-node-api": "^1.1.2",
-    "node-fetch": "^2.6.6",
-    "node-windows": "^0.1.4",
-    "ps-list": "^7.2.0",
-    "wallpaper": "^6.1.1"
+    "electron": "^22.0.2",
+    "electron-builder": "^23.6.0",
+    "electron-packager": "^17.1.1"
   },
   "author": "Elecstone"
 }

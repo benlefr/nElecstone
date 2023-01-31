@@ -1,15 +1,10 @@
 {
-    "opcacity": 48,
-    "visible": true,
-    "refresh": 3600,
-    "focus": false,
+    "opcacity": "100",
+    "visible": false,
+    "refresh": "3600",
+    "focus": true,
     "trayicontab": [
         "nhentai.net",
-        "multporn.net",
-        "mult34.com",
-        "pornhub.com",
-        "nxt-comics.net",
-        "fr.zizki.com",
-        "hentai.adkami.com"
+        "multporn.net"
     ]
 }
