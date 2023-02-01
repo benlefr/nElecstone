@@ -435,6 +435,7 @@ function newNhentaiWindow(config=null) {
     ipcMain.on(CANAL_CONFIG_UPDATE, (evt, data) => {
         mainWindow.setOpacity(data.opcacity / 100)
         mainWindow.setAlwaysOnTop(data.focus)
+        mainWindow.webContents.executeJavaScript("localStorage.setItem('refresh', " + data.refresh.toString() + ")")
     })
     ipcMain.on('log this message', (evt, data) => { log(data) })
     ipcMain.on(AFFICHER_NOUVEAU_CODE, (evt, data) => codeWebInterface = notifwindow(data))
