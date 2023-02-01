@@ -5,8 +5,8 @@ const NOTIF_EN_COURS = "NOTIF_EN_COURS";
 const CANAL_APP_VISIBLE = "CANAL_APP_VISIBLE";
 const CANAL_SET_APP_VISIBLE = 'CANAL_SET_APP_VISIBLE';
 let notifEnCours = false;
-let config = require('../config.json');
-setConfigRefresh(config.refresh);
+// let config = require('../config.json');
+// setConfigRefresh(config.refresh);
 
 
 
